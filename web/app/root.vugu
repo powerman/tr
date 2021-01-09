@@ -1,0 +1,35 @@
+<script type='application/x-go'>
+import "github.com/powerman/tr/web/app/internal/ui"
+type Root struct{}
+</script>
+
+<div>
+
+    <nav class='sticky-top navbar navbar-expand navbar-dark bg-primary bg-gradient'>
+        <div class='container'>
+            <a href='/' class='navbar-brand'>Time Report</a>
+        </div>
+    </nav>
+
+    <article class='container py-4'>
+
+        <ui:PageReport></ui:PageReport>
+
+    </article>
+
+    <footer class='fixed-bottom bg-light'>
+        <div class='container'>
+            <div class='row'>
+                <div class='col text-muted'>
+                    © Powerman 2021
+                </div>
+                <div class='col text-muted text-end'>
+                    This page is being rendered via <a href='https://webassembly.org/'>WebAssembly</a>,
+                    written in <a href='https://golang.org/'>Go</a>
+                    using <a href='https://vugu.org/'>Vugu</a>.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>

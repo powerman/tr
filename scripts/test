@@ -1,0 +1,12 @@
+#!/bin/bash
+PATH=$(gobin -m -p \
+	github.com/golangci/golangci-lint/cmd/golangci-lint \
+	gotest.tools/gotestsum |
+	xargs dirname | sed -z -e 's/\n/:/g')$PATH
+set -x -e -o pipefail
+
+shellcheck scripts/*
+
+golangci-lint run
+
+gotestsum -- -race -tags=integration "$@" ./...

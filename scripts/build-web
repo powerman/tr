@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e -o pipefail
+
+rsync -a "$(go env GOROOT)/misc/wasm/wasm_exec.js" web/static/js/
+
+# trap 'rm -f web/static/app.wasm' ERR
+# GOOS=js GOARCH=wasm go build -o web/static/app.wasm ./web/app
+
+wasm="web/static/app.wasm"
+out="/tmp/go-build-$$.out"
+build() { GOOS=js GOARCH=wasm go build -o "$wasm" "$@"; }
+error() { build -ldflags "-X 'main.errMsg=$(base64 "$out")'" ./web/error || rm -f "$wasm"; }
+trap error ERR
+trap 'rm -f "$out"' EXIT
+build ./web/app 2>&1 | tee "$out" >&2

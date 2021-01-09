@@ -1,0 +1,64 @@
+<script type='application/x-go'>
+import "strings"
+import "log"
+var _ = log.Println // Ensure import is used.
+</script>
+
+<form class='comp-record-form'>
+
+    <div class='row mb-1 justify-content-between'>
+        <div class='col-auto'>
+            <input type='date' required class='form-control'
+                @change='c.Record.Date = event.PropString("target", "value")'
+                .value='c.Record.Date'>
+        </div>
+        <div class='col-auto'>
+          <div class='input-group'>
+            <input type='time' required step='900' class='form-control'
+                @blur='c.fixStepFirefox(&c.Record.TimeFrom);'
+                @change='c.Record.TimeFrom = event.PropString("target", "value")'
+                .value='c.Record.TimeFrom'>
+            <span class='input-group-text'>–</span>
+            <input type='time' required step='900' class='form-control'
+                @blur='c.fixStepFirefox(&c.Record.TimeTo);'
+                @change='c.Record.TimeTo = event.PropString("target", "value")'
+                .value='c.Record.TimeTo'>
+          </div>
+        </div>
+        <div class='col-auto'>
+            <input type='text' placeholder='Activity' class='form-control'
+                @change='c.Record.Activity = event.PropString("target", "value")'
+                .value='c.Record.Activity'>
+        </div>
+        <div class='col-3'>
+            <input type='text' placeholder='Actor' class='form-control'
+                @change='c.Record.Actors = strings.Fields(event.PropString("target", "value"))'
+                .value='strings.Join(c.Record.Actors, " ")'>
+        </div>
+        <div class='col-2'>
+            <input type='text' placeholder='Customer' class='form-control'
+                @change='c.Record.Customer = event.PropString("target", "value")'
+                .value='c.Record.Customer'>
+        </div>
+    </div>
+
+    <div class='row mb-1'>
+        <div class='col'>
+            <textarea rows='2' placeholder='Details' class='form-control'
+                @change='c.Record.Details = event.PropString("target", "value")'
+                .value='c.Record.Details'></textarea>
+        </div>
+    </div>
+
+    <div class='row mb-3'>
+        <div class='col'>
+            <button type='button' class='btn btn-primary'
+                @click='c.add()'
+                >Add</button>
+            <button type='button' class='btn btn-outline-secondary'
+                @click='c.reset()'
+                >Reset</button>
+        </div>
+    </div>
+
+</form>

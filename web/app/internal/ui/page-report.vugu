@@ -1,0 +1,13 @@
+<script type='application/x-go'>
+import "github.com/powerman/tr/web/app/internal/ui/comp"
+import "log"
+var _ = log.Println // Ensure import is used.
+</script>
+
+<div class='ui-page-report'>
+
+    <comp:RecordForm></comp:RecordForm>
+
+    <comp:RecordRow vg-for='c.Records' :Record='*value'></comp:RecordRow>
+
+</div>
