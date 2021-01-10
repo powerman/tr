@@ -21,6 +21,7 @@ curl -sSfL https://github.com/koalaman/shellcheck/releases/download/v0.7.1/shell
 ### Usage
 
 ```sh
+./scripts/build
 go run ./cmd/server -dev
 ```
 
